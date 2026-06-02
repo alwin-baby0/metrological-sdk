@@ -115,9 +115,9 @@ const unloader = videoEl => {
 }
 
 export const setupVideoTag = () => {
-  const videoEls = document.getElementsByTagName('video')
-  if (videoEls && videoEls.length) {
-    return videoEls[0]
+  const videoElm = document.getElementById('video-player')
+  if (videoElm) {
+    return videoElm
   } else {
     const videoEl = document.createElement('video')
     const platformSettingsWidth = Settings.get('platform', 'width')
@@ -245,7 +245,7 @@ const videoPlayerPlugin = {
             })
             .catch(e => {
               fireOnConsumer('Error', { videoElement: videoEl, event: e })
-        
+
               // This is not API-compliant, as it results in firing "$videoPlayererror" rather than "$videoPlayerError".
               // See docs here for API-compliant events -> https://github.com/Metrological/metrological-sdk/blob/master/docs/plugins/videoplayer.md#event-overview
               // It has been kept for backwards compatability for library consumers who may have already written handler functions to match it.
@@ -452,7 +452,10 @@ const videoPlayerPlugin = {
 
 export default autoSetupMixin(videoPlayerPlugin, () => {
   precision =
-    (ApplicationInstance && ApplicationInstance.stage && ApplicationInstance.stage.getRenderPrecision()) || precision
+    (ApplicationInstance &&
+      ApplicationInstance.stage &&
+      ApplicationInstance.stage.getRenderPrecision()) ||
+    precision
 
   videoEl = setupVideoTag()
 
