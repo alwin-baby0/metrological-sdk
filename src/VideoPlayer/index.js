@@ -116,6 +116,8 @@ const unloader = videoEl => {
 
 export const setupVideoTag = () => {
   const videoElm = document.getElementById('video-player')
+  console.log('#### sample')
+
   if (videoElm) {
     return videoElm
   } else {
