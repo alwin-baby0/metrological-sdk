@@ -115,8 +115,9 @@ const unloader = videoEl => {
 }
 
 export const setupVideoTag = () => {
-  const videoElm = document.getElementById('video-player')
+  const videoElm = document.getElementById('lightning-video-player')
   if (videoElm) {
+    console.log('### sdk videoElm.id', videoElm.id)
     return videoElm
   } else {
     const videoEl = document.createElement('video')
@@ -126,7 +127,7 @@ export const setupVideoTag = () => {
     const platformSettingsHeight = Settings.get('platform', 'height')
       ? Settings.get('platform', 'height')
       : 1080
-    videoEl.setAttribute('id', 'video-player')
+    videoEl.setAttribute('id', 'lightning-video-player')
     videoEl.setAttribute('width', withPrecision(platformSettingsWidth))
     videoEl.setAttribute('height', withPrecision(platformSettingsHeight))
     videoEl.style.position = 'absolute'
@@ -138,6 +139,7 @@ export const setupVideoTag = () => {
     videoEl.style.width = withPrecision(platformSettingsWidth)
     videoEl.style.height = withPrecision(platformSettingsHeight)
     document.body.appendChild(videoEl)
+    console.log('### sdk videoEl.id', videoEl.id)
     return videoEl
   }
 }
